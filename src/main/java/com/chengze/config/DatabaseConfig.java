@@ -3,6 +3,7 @@ package com.chengze.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -13,13 +14,20 @@ import java.util.Properties;
 
 @Configuration
 public class DatabaseConfig {
-    private String dburl = "jdbc:postgresql://localhost:5432/formula1";
+    @Value("${database.serverName}")
+    protected final String dburl="";
+    // "jdbc:postgresql://localhost:5432/formula";
 
-    private String username = "admin";
+    @Value("${database.userName}")
+    protected final String username="";
+    //username = "admin";
 
-    private String password = "password";
+    @Value("${database.password}")
+    protected final String password="";
+    //  password = "password";
 
-    private String driverClass = "org.postgresql.ds.PGSimpleDataSource";
+    @Value("#{ shareProperties ['database.driverclase']}")
+    protected final String driverClass="";
 
     @Bean(name="dataSource")
     public DataSource getDataSource() {

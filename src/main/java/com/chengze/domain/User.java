@@ -14,13 +14,7 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @Column(name="first_name")
-    private String firstName;
-
-    @Column(name="second_name")
-    private String secondName;
-
-    @Column(name="third_name")
-    private String thirdName;
-
+//    private Long id;
+//    @Column(unique = true)
+//    private String Make;
 }
