@@ -1,0 +1,4 @@
+ALTER TABLE car RENAME COLUMN user_id TO owner_id;
+
+ALTER TABLE car
+ADD CONSTRAINT fk_car_onwer FOREIGN KEY (owner_id) REFERENCES owner (id) ON DELETE NO ACTION;

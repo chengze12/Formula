@@ -66,7 +66,8 @@ public class DatabaseConfig {
         dataSource.setMinEvictableIdleTimeMillis(1800000);
         return dataSource;
     }
-    @Bean(name="entityManagerFactory") //用来产生entityfactory 通过entitymanager管理
+    @Bean(name="entityManagerFactory")
+    //用来产生entityfactory 通过entitymanager管理
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());

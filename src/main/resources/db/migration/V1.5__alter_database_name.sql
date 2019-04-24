@@ -1,0 +1,2 @@
+ALTER TABLE users RENAME TO owner;
+ALTER TABLE cars RENAME TO car;

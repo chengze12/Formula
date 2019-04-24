@@ -4,10 +4,12 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+@Entity
+@Table(name="car")
 public class Car {
     @Id
-    @GeneratedValue(strategy =SEQUENCE , generator="cars_id_seq")
-    @SequenceGenerator(name="cars_id_seq", sequenceName= "cars_id_seq", allocationSize=1)
+    @GeneratedValue(strategy =SEQUENCE , generator="car_id_seq")
+    @SequenceGenerator(name="car_id_seq", sequenceName= "car_id_seq", allocationSize=1)
 
     @Column(name="make")
     private String make;
@@ -23,7 +25,7 @@ public class Car {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }
 
