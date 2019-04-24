@@ -1,1 +1,0 @@
-Alter table users add column images varchar(255);

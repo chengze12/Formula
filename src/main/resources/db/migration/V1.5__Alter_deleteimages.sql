@@ -1,1 +1,0 @@
-Alter table users drop column images;
