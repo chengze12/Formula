@@ -30,8 +30,16 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+        </plugins>
+    </build>
 
-            <plugin>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <build>
+            <plugins>
+                <plugin>
+
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway.version}</version>
@@ -44,12 +52,37 @@
                         <location>db/migration</location>
                     </locations>
                 </configuration>
+                </plugin>
+
+            </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>unit</id>
+            <build>
+                <plugins>
+                    <plugin>
+
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost:5432/Formula_Unit</url>
+                            <user>admin</user>
+                            <password>password</password>
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
-            </plugin>
-
-        </plugins>
-    </build>
 
 
     <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
