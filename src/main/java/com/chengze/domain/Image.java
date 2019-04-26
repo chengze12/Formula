@@ -26,12 +26,27 @@ public class Image {
         @JoinColumn(name = "car_id")
         private Car car;
 
-        public void setFront(String front) { front = front; }
-        public String getFront() { return front ; }
+        public void setFront(String front) {
+                this.front = front;
+        }
 
-        public void setback(String back) { back = back; }
-        public String getBack() { return back ; }
+        public String getFront(){
+                return this.front;
+        }
 
-        public void setInterior(String interior) { interior = interior; }
-        public String getInterior() { return interior ; }
+        public void setBack(String back) {
+                this.back = back;
+        }
+
+        public String getBack(){
+                return this.back;
+        }
+
+        public void setInterior(String interior) {
+                this.interior = interior;
+        }
+
+        public String getInterior(){
+                return this.interior;
+        }
 }

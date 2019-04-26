@@ -36,18 +36,43 @@ public class User {
         return id;
     }
 
-    public void setUsername(String user_name) { username = user_name; }
-    public String getUsername() { return username ; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public void setFirstname(String firstName) { firstName = firstName; }
-    public String getFirstname() { return username ; }
+    public String getUsername(){
+        return this.username;
+    }
 
-    public void setLastname(String lastName) { lastName = lastName; }
-    public String getLastname() { return lastName ; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setEmail(String email) { email= email; }
-    public String getEmail() { return email ; }
+    public String getFirstName(){
+        return this.firstName;
+    }
 
-    public void setPassword(String password) { password = password; }
-    public String getPassword() { return password ; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
 }

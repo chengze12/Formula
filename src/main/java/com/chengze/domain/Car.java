@@ -34,17 +34,37 @@ public class Car {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private List<Image> image;
 
-    public void setMake(String make) { make = make; }
-    public String getMake() { return make ; }
+    public void setMake(String make) {
+        this.make = make;
+    }
 
-    public void setModel(String model) { model = model; }
-    public String getModel() { return model ; }
+    public String getMake(){
+        return this.make;
+    }
 
-    public void setPrice(String price) { price = price; }
-    public String getPrice() { return price ; }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-    public void setYear(String year) { year= year; }
-    public String setYear() { return year ; }
+    public String getModel(){
+        return this.model;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getPrice(){
+        return this.price;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getYear(){
+        return this.year;
+    }
 
 }
 
