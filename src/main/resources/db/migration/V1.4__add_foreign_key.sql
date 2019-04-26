@@ -1,4 +1,0 @@
-ALTER TABLE cars ADD COLUMN user_id bigint;
-
-ALTER TABLE cars
-ADD CONSTRAINT fk_car_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION;

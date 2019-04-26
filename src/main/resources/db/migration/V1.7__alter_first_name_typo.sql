@@ -1,1 +1,0 @@
-ALTER TABLE owner RENAME firs_tname TO first_name;

@@ -1,36 +1,26 @@
 package com.chengze.repository;
 
-import com.chengze.config.AppConfig;
 import com.chengze.domain.Car;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
-@WebAppConfiguration
-@ContextConfiguration(classes ={AppConfig.class})
-@RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("Unit")
 public class CarRepositoryTest {
     @Autowired
-//    private CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Test
     @Transactional
-    public void findByIdTest(){
-//        Car c=new Car();
-//        c.setBrand("Aucra");
-//        c.setModel("SUV");
-//        carRepository.save(c);
-//        Optional<Car> testCar=carRepository.findById(c.getId());
-//        asserBotNull(testCar);
-//        assertEquals(c.getId(), testCar.get().getId());
+    public void findByIdTest() {
+        Car c = new Car();
+//image.setCar(c);
+//        c.setUsername("chengze");
+//        userRepository.save(c);
+//        Optional<User> testUser=userRepository.findById(c.getId());
+//        //to test if the thing u get is null
+//        assertNotNull(testUser);
+//        //to jarge if the test u get and the c u save is same
+//        assertEquals(c.getId(),testUser.get().getId());
     }
 }

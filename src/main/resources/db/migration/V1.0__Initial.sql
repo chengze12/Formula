@@ -1,6 +1,6 @@
-CREATE SEQUENCE users_id_seq;
+CREATE SEQUENCE user_id_seq;
 create table Users (
-    id bigint not null DEFAULT NEXTVAL('users_id_seq'),
+    id bigint not null DEFAULT NEXTVAL('user_id_seq'),
     primary key (id)
 );
-ALTER SEQUENCE users_id_seq OWNED BY Users.id;
+ALTER SEQUENCE user_id_seq OWNED BY Users.id;

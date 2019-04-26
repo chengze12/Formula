@@ -67,7 +67,7 @@ public class DatabaseConfig {
         return dataSource;
     }
     @Bean(name="entityManagerFactory")
-    //用来产生entityfactory 通过entitymanager管理
+    //used to produce entityfactory managed by entitymanager
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
