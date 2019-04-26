@@ -40,11 +40,14 @@ public class User {
     public String getUsername() { return username ; }
 
     public void setFirstname(String firstName) { firstName = firstName; }
-    public String setFirstname() { return username ; }
+    public String getFirstname() { return username ; }
 
     public void setLastname(String lastName) { lastName = lastName; }
-    public String setLastname() { return lastName ; }
+    public String getLastname() { return lastName ; }
 
     public void setEmail(String email) { email= email; }
-    public String setemail() { return email ; }
+    public String getEmail() { return email ; }
+
+    public void setPassword(String password) { password = password; }
+    public String getPassword() { return password ; }
 }

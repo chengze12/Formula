@@ -25,4 +25,13 @@ public class Image {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "car_id")
         private Car car;
+
+        public void setFront(String front) { front = front; }
+        public String getFront() { return front ; }
+
+        public void setback(String back) { back = back; }
+        public String getBack() { return back ; }
+
+        public void setInterior(String interior) { interior = interior; }
+        public String getInterior() { return interior ; }
 }
