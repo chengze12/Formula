@@ -24,30 +24,30 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!--&lt;!&ndash; Declare a Spring MVC DispatcherServlet as usual &ndash;&gt;-->
-    <!--<servlet>-->
-    <!--<servlet-name>restServlet</servlet-name>-->
-    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-    <!--&lt;!&ndash; Configure DispatcherServlet to use AnnotationConfigWebApplicationContext-->
-    <!--instead of the default XmlWebApplicationContext &ndash;&gt;-->
-    <!--<init-param>-->
-    <!--<param-name>contextClass</param-name>-->
-    <!--<param-value>-->
-    <!--org.springframework.web.context.support.AnnotationConfigWebApplicationContext-->
-    <!--</param-value>-->
-    <!--</init-param>-->
-    <!--&lt;!&ndash; Again, config locations must consist of one or more comma- or space-delimited-->
-    <!--and fully-qualified @Configuration classes &ndash;&gt;-->
-    <!--<init-param>-->
-    <!--<param-name>contextConfigLocation</param-name>-->
-    <!--<param-value>io.ascending.training.config.MvcConfig</param-value>-->
-    <!--</init-param>-->
-    <!--</servlet>-->
+    <!-- Declare a Spring MVC DispatcherServlet as usual -->
+    <servlet>
+        <servlet-name>restServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- Configure DispatcherServlet to use AnnotationConfigWebApplicationContext
+        instead of the default XmlWebApplicationContext -->
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+        </init-param>
+        <!-- Again, config locations must consist of one or more comma- or space-delimited
+        and fully-qualified @Configuration classes -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>com.chengze.config.MvcConfig</param-value>
+        </init-param>
+    </servlet>
 
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>restServlet</servlet-name>-->
-    <!--<url-pattern>/</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>restServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

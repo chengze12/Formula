@@ -2,6 +2,7 @@ package com.chengze.domain;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -34,12 +35,22 @@ public class Car {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private List<Image> image;
 
+    //user de get set
+    public void setUser(User u) {
+        this.user = u;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
     public void setMake(String make) {
         this.make = make;
     }
 
     public String getMake(){
-        return this.make;
+
+        return make;
     }
 
     public void setModel(String model) {
@@ -47,7 +58,8 @@ public class Car {
     }
 
     public String getModel(){
-        return this.model;
+
+        return model;
     }
 
     public void setPrice(String price) {
@@ -55,16 +67,27 @@ public class Car {
     }
 
     public String getPrice(){
-        return this.price;
+
+        return price;
     }
 
     public void setYear(String year) {
+
         this.year = year;
     }
 
     public String getYear(){
-        return this.year;
+
+        return year;
     }
 
+
+    public static void main(String[] args){
+        List<Car> cars = new ArrayList<>();
+        cars.add(null);
+        cars.add(new Car());
+
+        List<Car> cars1 = null;
+    }
 }
 

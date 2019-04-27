@@ -27,26 +27,31 @@ public class Image {
         private Car car;
 
         public void setFront(String front) {
+
                 this.front = front;
         }
 
         public String getFront(){
-                return this.front;
+                return front;
         }
 
         public void setBack(String back) {
+
                 this.back = back;
         }
 
         public String getBack(){
-                return this.back;
+
+                return back;
         }
 
         public void setInterior(String interior) {
+
                 this.interior = interior;
         }
 
         public String getInterior(){
-                return this.interior;
+
+                return interior;
         }
 }

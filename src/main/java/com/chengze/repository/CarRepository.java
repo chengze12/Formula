@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface CarRepository extends CrudRepository<Car, Long> {
     List<Car> findAll();
 
-    @Query("select u FROM User  u LEFT JOIN FETCH u.cars where u.cars.id = ?1")
+    @Query("select c FROM Car c LEFT JOIN FETCH c.user where c.user.id = ?1")
     Optional<Car> findCarsByUserId(Long Id);
 }
