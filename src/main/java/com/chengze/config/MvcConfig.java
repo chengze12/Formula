@@ -41,7 +41,7 @@ public class MvcConfig implements WebMvcConfigurer {
         resolver.setViewResolvers(viewResolversImpl);
         return resolver;
     }
-    
+
     private ViewResolver jsonViewResolver (){
         return new JsonViewResolver();
     }

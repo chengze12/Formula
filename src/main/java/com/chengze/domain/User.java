@@ -81,12 +81,8 @@ public class User {
         this.password = password;
     }
 
-    public String getPassword(){
 
-        return password;
-    }
-
-    public List<Car> getCars(){
-        return cars;
-    }
+//    public List<Car> getCars(){
+//        return cars;
+//    }
 }

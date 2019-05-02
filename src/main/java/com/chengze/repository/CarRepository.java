@@ -11,6 +11,10 @@ import java.util.Optional;
 public interface CarRepository extends CrudRepository<Car, Long> {
     List<Car> findAll();
 
-    @Query("select c FROM Car c LEFT JOIN FETCH c.user where c.user.id = ?1")
-    Optional<Car> findCarsByUserId(Long Id);
+
+//    Car car= car.findById();
+    List<Car> findByMakeIgnoreCase(String make);
+
+//    @Query("select c FROM Car c LEFT JOIN FETCH c.user where c.user.id = ?1")
+//    Optional<Car> findCarsByUserId(Long Id);
 }

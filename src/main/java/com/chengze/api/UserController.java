@@ -6,11 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @ResponseBody
@@ -24,5 +23,23 @@ public class UserController {
         logger.debug("list users");
        return userRepository.findAll();
 //        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public User signUpUser(@RequestBody User user){
+//        User user= new User();
+        userRepository.save(user);
+        return user;
+    }
+    @RequestMapping(method = RequestMethod.GET,value="/{Id}")
+    public User getUserById(@PathVariable("Id")  Long Id){
+        Optional<User> opt= userRepository.findById(Id);
+        return opt.get();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"username"})
+    public User getUserByUsername(@RequestParam("username") String username){
+        Optional <User>  user= userRepository.findByUsernameIgnoreCase(username);
+        return user.get();
     }
 }
