@@ -5,7 +5,7 @@ create table Users (
     first_name varchar(255) not NULL  ,
     last_name varchar(255) not NULL  ,
     email varchar(255) not NULL UNIQUE ,
-    user_id varchar(255) not NULL UNIQUE ,
+    password varchar(255) not NULL ,
     primary key (id)
 );
 ALTER SEQUENCE user_id_seq OWNED BY Users.id;

@@ -12,5 +12,8 @@ public interface UserRepository extends CrudRepository<User, Long > {
         List<User> findAll();
 
 //        @Query(Select)
-        Optional<User> findByUsernameIgnoreCase(String username);
+       User findByUsernameIgnoreCase(String username);
+
+//    @Query("select u FROM User u LEFT JOIN FETCH u.car where c.id = ?1")
+//    Optional<User> findCarsByUserId(Long Id);
 }
