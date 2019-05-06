@@ -26,6 +26,14 @@ public class Image {
         @JoinColumn(name = "car_id")
         private Car car;
 
+        public void setCar(Car c) {
+                this.car = c;
+        }
+
+        public Car getCar(){
+                return car;
+        }
+
         public void setFront(String front) {
 
                 this.front = front;

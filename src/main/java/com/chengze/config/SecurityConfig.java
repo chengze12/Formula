@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 //  step   1
 //@Configuration
@@ -30,9 +33,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-                .password("{noop}password").roles("REGISTERED_USER");
+//        auth.inMemoryAuthentication().withUser("user")
+//                .password("{noop}password").roles("REGISTERED_USER");
+        PasswordEncoder encoder= new BCryptPasswordEncoder();
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
