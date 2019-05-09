@@ -68,7 +68,7 @@
                         <version>${flyway.version}</version>
                         <configuration>
                             <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/Formula_Unit</url>
+                            <url>jdbc:postgresql://localhost:5432/formula_unit</url>
                             <user>admin</user>
                             <password>password</password>
                             <locations>

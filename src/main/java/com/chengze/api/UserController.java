@@ -19,7 +19,7 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserService userService;
-
+//  http://localhost:8080/api/users
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getUserList() {
         logger.debug("list users");
@@ -30,7 +30,7 @@ public class UserController {
     //http://localhost:8080/api/users
     @RequestMapping(method = RequestMethod.POST)
     public User signUpUser(@RequestBody User user) {
-        userService.save(user);
+        userService.createUser(user);
         return user;
     }
 

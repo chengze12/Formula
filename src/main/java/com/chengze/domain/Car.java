@@ -82,12 +82,12 @@ public class Car {
     }
 
 
-    public static void main(String[] args){
-        List<Car> cars = new ArrayList<>();
-        cars.add(null);
-        cars.add(new Car());
-
-        List<Car> cars1 = null;
-    }
+//    public static void main(String[] args){
+//        List<Car> cars = new ArrayList<>();
+//        cars.add(null);
+//        cars.add(new Car());
+//
+//        List<Car> cars1 = null;
+//    }
 }
 

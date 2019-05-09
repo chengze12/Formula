@@ -44,7 +44,7 @@ public class CarController {
         return carService.save(car);
     }
 
-
+    //http://localhost:8080/api/cars/1
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Car getCarById(@PathVariable("id") Long Id) {
         Car opt = carService.findById(Id);

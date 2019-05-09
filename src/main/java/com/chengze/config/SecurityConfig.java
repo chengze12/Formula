@@ -11,10 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//  step   1
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+  //step   1
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
 //        auth.inMemoryAuthentication().withUser("user1").password("{noop}password").roles("REGISTERED_USER");
@@ -28,23 +28,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //                .formLogin();
 //    }
 //}
-// step 2
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsService userDetailsService;
-
+//// step 2
+//@Configuration
+//@EnableWebSecurity
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user")
-//                .password("{noop}password").roles("REGISTERED_USER");
-        PasswordEncoder encoder= new BCryptPasswordEncoder();
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
+        auth.inMemoryAuthentication().withUser("user")
+                .password("{noop}password").roles("REGISTERED_USER");
+//        PasswordEncoder encoder= new BCryptPasswordEncoder();
+//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/users/signup").permitAll()
+        http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/users/signup","/api/users").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER","ADMIN")
                 .and().formLogin();

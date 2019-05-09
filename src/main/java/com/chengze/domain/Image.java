@@ -10,7 +10,7 @@ public class Image {
         @Id
         @GeneratedValue(strategy =SEQUENCE , generator="image_id_seq")
         @SequenceGenerator(name="image_id_seq", sequenceName= "image_id_seq", allocationSize=1)
-
+        Long Id;
         @Column(name="front")
         private String front;
 

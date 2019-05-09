@@ -5,9 +5,10 @@ import com.chengze.repository.ImageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ImageService {
 
     @Autowired
@@ -21,4 +22,9 @@ public class ImageService {
         logger.info("total number of array is:" + imageRepository.findAll().size());
         return imageRepository.findAll();
     }
+
+    public Image findById(Long id){
+        return imageRepository.findById(id).get();
+    }
+
 }

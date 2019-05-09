@@ -31,12 +31,19 @@ public class ImageController {
         return image;
     }
 
-
+    //http://localhost:8080/api/images/car/1
     @RequestMapping(value = "/car/{car_id}",method = RequestMethod.POST)
     public Image UploadImage(@RequestBody Image image , @PathVariable("car_id") Long carId) {
 //        Car car= new Car();
         Car car = carService.findById(carId);
         image.setCar(car);
         return imageService.save(image);
+    }
+    //http://localhost:8080/api/images/1
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public Image deleteImageById(@PathVariable("id") Long Id){
+        Image delete = imageService.findById(Id);
+        return delete;
+
     }
 }
