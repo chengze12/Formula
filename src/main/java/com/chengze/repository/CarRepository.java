@@ -17,5 +17,6 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
     List<Car> findByModelIgnoreCase(String model);
 
-
+//    @Query("select u FROM User u LEFT JOIN FETCH u.car where c.id = ?1")
+//    Optional<User> findCarsByUserId(Long Id);
 }

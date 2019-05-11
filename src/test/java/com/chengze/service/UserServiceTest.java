@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 @ContextConfiguration(classes ={AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("Unit")
+@ActiveProfiles("unit")
 public class UserServiceTest {
         @Autowired
         private UserService userService;
@@ -32,6 +32,7 @@ public class UserServiceTest {
             u.setLastName("zi");
             u.setPassword("1234567");
             u.setEmail("chengze1234@gmail.com");
+            u.setAccountNonExpired(true);
             userService.save(u);
             User testUser = userService.findByUsernameIgnoreCase(u.getUsername());
             assertNotNull(testUser);

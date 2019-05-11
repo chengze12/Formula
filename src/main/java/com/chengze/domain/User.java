@@ -35,6 +35,9 @@ public class User implements Serializable, UserDetails {
     @Column(name="password")
     private String password;
 
+    @Column(name = "account_Non_Expired")
+    private Boolean accountNonExpired;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Car> cars;
 
@@ -63,7 +66,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
 
     @Override
@@ -116,8 +119,14 @@ public class User implements Serializable, UserDetails {
         this.password = password;
     }
 
+    public Boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
 
-//    public List<Car> getCars(){
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+    //    public List<Car> getCars(){
 //        return cars;
 //    }
 }

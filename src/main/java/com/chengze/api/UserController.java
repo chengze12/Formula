@@ -53,4 +53,11 @@ public class UserController {
         User deleteuser = userService.findById(Id);
         return deleteuser;
     }
+
+    //http://localhost:8080/api/users/login
+    @RequestMapping(value="/login",method = RequestMethod.POST )
+        public User login(@RequestBody User user){
+        logger.info("123");
+        return user;
+    }
 }
