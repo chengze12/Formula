@@ -1,5 +1,6 @@
 package com.chengze.repository;
 
+import com.chengze.domain.Authority;
 import com.chengze.domain.User;
 import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,7 @@ public interface UserRepository extends CrudRepository<User, Long > {
 
 //    @Query("select u FROM User u LEFT JOIN FETCH u.car where c.id = ?1")
 //    Optional<User> findCarsByUserId(Long Id);
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.chengze.service;
 
+import com.chengze.domain.Authority;
 import com.chengze.domain.User;
 import com.chengze.repository.UserRepository;
 import org.slf4j.Logger;
@@ -16,6 +17,9 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    AuthorityService authorityService;
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public List<User> findAll(){
@@ -28,11 +32,17 @@ public class UserService {
     }
     private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
 
+
     @Transactional
     public User createUser(User newUser){
+        newUser.setAccountNonExpired(true);
+        newUser.setAccountNonLocked(true);
+        newUser.setCredentialsNonExpired(true);
+        newUser.setEnabled(true);
+        authorityService.addAuthority(newUser,"ROLE_REGISTERED_USER");
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
-        save(newUser);
+        userRepository.save(newUser);
         return newUser;
     }
 
@@ -48,4 +58,8 @@ public class UserService {
     public User findByUsernameIgnoreCase(String username ){
         return userRepository.findByUsernameIgnoreCase(username);
     }
+
+//    public List<Authority> findAuthorities(User user){
+//        return userRepository.findAuthorities(user);
+//    }
 }

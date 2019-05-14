@@ -40,12 +40,42 @@ public class AuthorityServiceTest {
         u.setEmail("ewq@gmail.com");
         u.setPassword("123");
         u.setAccountNonExpired(true);
+        u.setAccountNonLocked(true);
+        u.setCredentialsNonExpired(true);
+        u.setEnabled(true);
+//        u.isCredentialsNonExpired();
+//        u.setAccountNonExpired(true);
         userService.save(u);
         a.setUser(u);
         authorityService.save(a);
-        List<Authority> testAuthority = authorityService.findByUserId(u.getId());
+        List<Authority> testAuthority = authorityService.findAuthority(u);
         assertNotNull(testAuthority);
         //assertEquals(size(2));
         assertEquals(a.getAuthority(), testAuthority.get(0).getAuthority());
+    }
+
+    @Test
+    @Transactional
+    public void createUserWithAuthority(){
+        Authority authority = new Authority();
+        authority.setRole("admin");
+//        UserService userService= new UserService();
+//        userService.createUser()
+        User user=new User();
+        user.setUsername("pangzi");
+        user.setFirstName("pang");
+        user.setLastName("zi");
+        user.setEmail("ewq@gmail.com");
+        user.setPassword("123");
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        authority.setUser(user);
+        userService.save(user);
+        authorityService.save(authority);
+        List<Authority> testAuthority = authorityService.findAuthority(user);
+        assertNotNull(testAuthority);
+        assertEquals(authority.getAuthority(), testAuthority.get(0).getAuthority());
     }
 }

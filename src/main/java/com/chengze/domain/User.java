@@ -1,5 +1,7 @@
 package com.chengze.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,7 +21,6 @@ public class User implements Serializable, UserDetails {
     @SequenceGenerator(name="user_id_seq", sequenceName="user_id_seq", allocationSize=1)
     private Long id;
 
-
     @Column(unique=true)
     private String username;
 
@@ -38,8 +39,25 @@ public class User implements Serializable, UserDetails {
     @Column(name = "account_Non_Expired")
     private Boolean accountNonExpired;
 
+    @Column(name = "account_Non_Locked")
+    private Boolean accountNonLocked;
+
+    @Column(name = "Credentials_Non_Expired")
+    private Boolean credentialsNonExpired;
+
+    @Column(name = "is_Enabled")
+    private Boolean enable;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Car> cars;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Authority> authorities;
+
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
     public Long getId() {
         return id;
@@ -54,10 +72,7 @@ public class User implements Serializable, UserDetails {
         return null;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
+
 
     public String getUsername(){
 
@@ -69,63 +84,107 @@ public class User implements Serializable, UserDetails {
         return accountNonExpired;
     }
 
+    public void setAccountNonExpired(boolean accountNonExpired ) {
+
+        this.accountNonExpired = accountNonExpired;
+    }
+    public boolean getAccountNonExpired(){
+
+        return accountNonExpired;
+    }
+
+
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
+
+
+    public void setAccountNonLocked(boolean accountNonLocked ) {
+
+        this.accountNonLocked = accountNonLocked;
+    }
+    public boolean getAccountNonLocked(){
+
+        return accountNonLocked;
+    }
+
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
+
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired ) {
+
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+    public boolean getCredentialsNonExpired(){
+
+        return credentialsNonExpired;
+    }
+
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enable;
     }
+
+    public void setEnabled(boolean enable ) {
+
+        this.enable = enable;
+    }
+    public boolean getEnabled(){
+
+        return enable;
+    }
+
 
     public void setFirstName(String firstName) {
 
         this.firstName = firstName;
     }
-
     public String getFirstName(){
 
         return firstName;
     }
 
+
     public void setLastName(String lastName) {
 
         this.lastName = lastName;
     }
-
     public String getLastName(){
 
         return lastName;
     }
 
+
+
     public void setEmail(String email) {
 
         this.email = email;
     }
-
     public String getEmail(){
 
         return email;
     }
 
+
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+    @JsonProperty
     public void setPassword(String password) {
 
         this.password = password;
     }
 
-    public Boolean getAccountNonExpired() {
-        return accountNonExpired;
-    }
 
-    public void setAccountNonExpired(Boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
+
     //    public List<Car> getCars(){
 //        return cars;
 //    }

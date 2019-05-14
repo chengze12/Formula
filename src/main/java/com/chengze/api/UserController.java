@@ -1,6 +1,8 @@
 package com.chengze.api;
 
+import com.chengze.domain.Authority;
 import com.chengze.domain.User;
+import com.chengze.extend.security.RestAuthenticaitionRequest;
 import com.chengze.repository.UserRepository;
 import com.chengze.service.UserService;
 import org.slf4j.Logger;
@@ -27,10 +29,13 @@ public class UserController {
 //        return null;
     }
 
+//    String admin;
+//    private List<Authority> authorities={};
     //http://localhost:8080/api/users
     @RequestMapping(method = RequestMethod.POST)
     public User signUpUser(@RequestBody User user) {
         userService.createUser(user);
+//        user.setAuthorities(authorities);
         return user;
     }
 
@@ -56,8 +61,8 @@ public class UserController {
 
     //http://localhost:8080/api/users/login
     @RequestMapping(value="/login",method = RequestMethod.POST )
-        public User login(@RequestBody User user){
+        public RestAuthenticaitionRequest login(@RequestBody RestAuthenticaitionRequest restAuthenticaitionRequest){
         logger.info("123");
-        return user;
+        return restAuthenticaitionRequest ;
     }
 }

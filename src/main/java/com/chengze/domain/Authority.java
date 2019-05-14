@@ -1,5 +1,6 @@
 package com.chengze.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -20,6 +21,17 @@ public class Authority implements Serializable, GrantedAuthority {
     @Column(name="role")
     private String role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+    public Authority(){}
+    public Authority(User user, String authority){
+        this.user=user;
+        this.role=authority;
+    }
+
     public Long getId(){
         return id;
     }
@@ -31,9 +43,7 @@ public class Authority implements Serializable, GrantedAuthority {
         return role;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+
 
     public void setUser(User u) {
         this.user = u;

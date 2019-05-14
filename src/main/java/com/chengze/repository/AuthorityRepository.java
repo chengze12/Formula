@@ -14,4 +14,5 @@ public interface AuthorityRepository extends CrudRepository<Authority, Long> {
     @Query("select a FROM Authority a where a.user.id = ?1")
     List<Authority> findAuthorityByUserId(Long Id);
 
+//    List<Authority> findAuthorities(User user);
 }
