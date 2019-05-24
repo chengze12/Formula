@@ -1,44 +1,40 @@
-package com.chengze.extend;
+package com.chengze.service;
 
 import com.chengze.config.AppConfig;
-import com.chengze.domain.Authority;
 import com.chengze.domain.User;
-import com.chengze.extend.security.UserDetailsServiceImpl;
-import com.chengze.repository.UserRepository;
+import com.chengze.extend.security.JwtTokenUtil;
+import com.sun.tools.corba.se.idl.constExpr.Not;
+import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Date;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
-
 
 @WebAppConfiguration
 @ContextConfiguration(classes ={AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
-public class UserDetailsServiceImplTest {
+public class JwtTokenTest {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserRepository userRepository;
+    private  UserService userService;
 
     @Test
     @Transactional
-    public void loadUserByUsernametest(){
+    public void TokenTest() throws NotFoundException {
         User u= new User();
         u.setUsername("pang");
         u.setFirstName("pang");
@@ -49,13 +45,22 @@ public class UserDetailsServiceImplTest {
         u.setAccountNonLocked(true);
         u.setCredentialsNonExpired(true);
         u.setEnabled(true);
-        Authority authority = new Authority();
-        authority.setRole("admin");
-        authority.setUser(u);
-        userRepository.save(u);
-        UserDetails testUser = userDetailsService.loadUserByUsername(u.getUsername());
-        assertNotNull (testUser);
-        assertEquals(u.getUsername(),testUser.getUsername());
-        assertEquals(u.getAuthorities(),testUser.getAuthorities());
+        userService.save(u);
+//        User testUser = userService.findByUsernameIgnoreCase(u.getUsername());
+        String token1=jwtTokenUtil.generateToken(u);
+        String usernametest= jwtTokenUtil.getUsernameFromToken(token1);
+        assertNotNull(usernametest);
+        assertEquals(u.getUsername(),usernametest);
+
+//        Date IsExpiretest= jwtTokenUtil.getExpirationDateFromToken(token1);
+//        assertNotNull(IsExpiretest);
+    }
+
+    private User u;
+
+    public void generateTokenTest() throws NotFoundException{
+        String token= jwtTokenUtil.generateToken(u);
+        String[] test = token.split("\\.");
+        assertEquals(3,test.length);
     }
 }

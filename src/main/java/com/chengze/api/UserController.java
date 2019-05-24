@@ -4,7 +4,6 @@ import com.chengze.domain.User;
 import com.chengze.extend.security.JwtTokenUtil;
 import com.chengze.extend.security.RestAuthenticaitionRequest;
 import com.chengze.service.UserService;
-import com.sun.tools.corba.se.idl.constExpr.Not;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -66,7 +66,14 @@ public class UserController {
     //http://localhost:8080/api/users?username=chengze12 //parameter
     @RequestMapping(method = RequestMethod.GET, params = {"username"})
     public User getUserByUsername(@RequestParam("username") String username) {
-        return userService.findByUsernameIgnoreCase(username);
+        User user=null;
+        try{
+            user= userService.findByUsernameIgnoreCase(username);
+        }
+        catch (NotFoundException reportproblem){
+            logger.debug("some probelm found");
+        }
+        return user;
     }
 
     //http://localhost:8080/api/users/1
@@ -82,7 +89,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> login(@RequestBody RestAuthenticaitionRequest authenticaitionRequest) {
+    public ResponseEntity<Map> login(@RequestBody RestAuthenticaitionRequest authenticaitionRequest) {
         try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
 
@@ -91,18 +98,19 @@ public class UserController {
             );
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-//            try{
+            try{
                 final UserDetails userDetails=userService.findByUsernameIgnoreCase((authenticaitionRequest.getUsername()));
                 final String token=jwtTokenUtil.generateToken(userDetails);
-                return ResponseEntity.ok(token);
-//            }catch (NotFoundException e){
-//                logger.error("System cant find user");
-//                return ResponseEntity.notFound().build();
-//            }
+                return ResponseEntity.ok(jwtTokenUtil.mapToken(token));
+            }catch (NotFoundException e){
+                logger.error("System cant find user by email or username");
+                return ResponseEntity.notFound().build();
+            }
 //            return ResponseEntity.ok("login successful");
         } catch (AuthenticationException ex) {
             logger.error("authentication failure");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, check your username");
+            return  null;
+ //  todo: return map          ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, check your username");
         }
     }
 }

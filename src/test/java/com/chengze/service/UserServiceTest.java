@@ -2,6 +2,7 @@ package com.chengze.service;
 
 import com.chengze.config.AppConfig;
 import com.chengze.domain.User;
+import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserServiceTest {
 
         @Test
         @Transactional
-        public void findByMakeTest(){
+        public void findByNameTest() throws NotFoundException {
             User u= new User();
             u.setUsername("pang");
             u.setFirstName("pang");
@@ -33,6 +34,9 @@ public class UserServiceTest {
             u.setPassword("1234567");
             u.setEmail("chengze1234@gmail.com");
             u.setAccountNonExpired(true);
+            u.setAccountNonLocked(true);
+            u.setCredentialsNonExpired(true);
+            u.setEnabled(true);
             userService.save(u);
             User testUser = userService.findByUsernameIgnoreCase(u.getUsername());
             assertNotNull(testUser);
