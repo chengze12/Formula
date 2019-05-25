@@ -49,9 +49,11 @@ public class User implements Serializable, UserDetails {
     private Boolean enable;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Car> cars;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Authority> authorities;
 
 
