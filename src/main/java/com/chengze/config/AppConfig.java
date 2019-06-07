@@ -16,7 +16,6 @@ public class AppConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Bean(name= "shareProperties")
     public PropertiesFactoryBean getShareProperties(){
-
         logger.debug("I am in the share properties");
         PropertiesFactoryBean bean =new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));

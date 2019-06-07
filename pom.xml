@@ -45,9 +45,9 @@
                 <version>${flyway.version}</version>
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/formula</url>
-                    <user>admin</user>
-                    <password>password</password>
+                    <url>jdbc:postgresql://${db_url}</url>
+                    <user>${db_username}</user>
+                    <password>${db_password}</password>
                     <locations>
                         <location>db/migration</location>
                     </locations>
@@ -68,9 +68,9 @@
                         <version>${flyway.version}</version>
                         <configuration>
                             <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/formula_unit</url>
-                            <user>admin</user>
-                            <password>password</password>
+                            <url>jdbc:postgresql://${db_url}</url>
+                            <user>${db_username}</user>
+                            <password>${db_password}</password>
                             <locations>
                                 <location>db/migration</location>
                             </locations>
@@ -152,6 +152,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!--aws sdk-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.534</version>
         </dependency>
 
         <dependency>
