@@ -2,6 +2,7 @@ package com.chengze.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +17,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
 @Table(name="users")
 public class User implements Serializable, UserDetails {
+    public interface WithoutPasswordView {};
+    public interface WithPasswordView extends WithoutPasswordView {};
+
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="user_id_seq")
     @SequenceGenerator(name="user_id_seq", sequenceName="user_id_seq", allocationSize=1)
@@ -75,7 +79,7 @@ public class User implements Serializable, UserDetails {
     }
 
 
-
+    @JsonView(WithoutPasswordView.class)
     public String getUsername(){
 
         return username;
@@ -175,7 +179,8 @@ public class User implements Serializable, UserDetails {
 
 
     @Override
-    @JsonIgnore
+//    @JsonIgnore
+    @JsonView(WithPasswordView.class)
     public String getPassword() {
         return password;
     }
@@ -187,7 +192,4 @@ public class User implements Serializable, UserDetails {
 
 
 
-    //    public List<Car> getCars(){
-//        return cars;
-//    }
 }

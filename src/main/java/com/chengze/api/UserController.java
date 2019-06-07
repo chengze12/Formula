@@ -4,6 +4,7 @@ import com.chengze.domain.User;
 import com.chengze.extend.security.JwtTokenUtil;
 import com.chengze.extend.security.RestAuthenticaitionRequest;
 import com.chengze.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-
+@RestController
 @Controller
 @ResponseBody
 @RequestMapping(value= {"/api/users" , "/api/user"})
@@ -112,5 +113,11 @@ public class UserController {
             return  null;
  //  todo: return map          ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, check your username");
         }
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @JsonView(User.WithoutPasswordView.class)
+    public User getUser() {
+        return new User();
     }
 }

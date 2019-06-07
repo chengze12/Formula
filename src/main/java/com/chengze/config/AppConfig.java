@@ -1,12 +1,13 @@
 package com.chengze.config;
 
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
@@ -22,5 +23,17 @@ public class AppConfig {
         return bean;
     }
 
+    @Value("${region}")
+    private String clientRegion;
+
+    @Bean
+    @Profile({"dev","test"})
+    public AmazonS3 getAmazonS3bean(){
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+            .withRegion(clientRegion)
+            .withCredentials(new DefaultAWSCredentialsProviderChain())
+            .build();
+        return s3Client;
+    }
 }
 
