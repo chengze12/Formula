@@ -23,7 +23,7 @@ public class AppConfig {
         return bean;
     }
 
-    @Value("${region}")
+    @Value("${aws.region}")
     private String clientRegion;
 
     @Bean

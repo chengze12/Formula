@@ -27,18 +27,15 @@ public class LamStorageService {
         s3Client.putObject(request);
     }
 
-//    private String bucket;
-//
-//    public String getObjectURL(String bucket, String key){
-//        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-//                .withRegion(clientRegion)
-//                .withCredentials(new ProfileCredentialsProvider())
-//                .build();
-//        String url= s3Client.getUrl(bucket, key).toString();
-//        return url;
-//    }
-//
-//    public Object getObject(String key) {
+
+    public String getObjectURL(String bucket, String key){
+
+        URL url= s3Client.getUrl(bucket, key);
+        String geturl= url.toString();
+        return geturl;
+    }
+
+//    public Object getObject(String key) {URL
 //        if (key == null) {
 //            return null;
 //        }else{

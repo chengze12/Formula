@@ -2,7 +2,6 @@ package com.chengze.api;
 
 import com.chengze.domain.Car;
 import com.chengze.domain.Image;
-import com.chengze.domain.User;
 import com.chengze.service.CarService;
 import com.chengze.service.ImageService;
 import org.slf4j.Logger;
@@ -10,6 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -45,5 +48,12 @@ public class ImageController {
         Image delete = imageService.findById(Id);
         return delete;
 
+    }
+
+    //http://localhost:8080/api/images/picture
+    @RequestMapping(value = "/picture", method = RequestMethod.POST)
+    public Map<String, String > uploadPicture(@RequestParam(value = "pic") MultipartFile picture){
+        logger.debug(picture.getOriginalFilename());
+        return new HashMap<>();
     }
 }

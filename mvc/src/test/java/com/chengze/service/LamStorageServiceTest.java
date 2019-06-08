@@ -31,4 +31,11 @@ public class LamStorageServiceTest {
         lamStorageService.uploadObject("formula-dev", testFile);
         Mockito.verify(s3Client, Mockito.times(1)).putObject(any());
     }
+
+    @Test
+    public void getObjectUrlTest(){
+        String key="fakekey";
+        lamStorageService.getObjectURL("formula-dev", key);
+        Mockito.verify(s3Client, Mockito.times(1)).putObject(any());
+    }
 }
