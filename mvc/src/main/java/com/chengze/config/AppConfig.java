@@ -1,8 +1,11 @@
 package com.chengze.config;
 
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,5 +38,15 @@ public class AppConfig {
             .build();
         return s3Client;
     }
+
+    @Bean
+    @Profile({"dev", "test"})
+    public AmazonSQS getAmazonSQS(){
+        AmazonSQS SQSclient = AmazonSQSClientBuilder.standard()
+                .withCredentials(new DefaultAWSCredentialsProviderChain())
+                .build();
+        return SQSclient;
+    }
+
 }
 

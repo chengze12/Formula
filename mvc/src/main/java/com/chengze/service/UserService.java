@@ -21,6 +21,7 @@ public class UserService {
     @Autowired
     AuthorityService authorityService;
 
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public List<User> findAll() {
