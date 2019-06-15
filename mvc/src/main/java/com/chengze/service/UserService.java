@@ -20,6 +20,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     AuthorityService authorityService;
+    @Autowired
+    MessageSQSService messageSQSService;
 
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,6 +48,7 @@ public class UserService {
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
+//        messageSQSService.sendMessage("Welcome to Formula!");
         return newUser;
     }
 

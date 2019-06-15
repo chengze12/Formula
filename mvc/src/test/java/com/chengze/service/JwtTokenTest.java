@@ -3,7 +3,6 @@ package com.chengze.service;
 import com.chengze.config.AppConfig;
 import com.chengze.domain.User;
 import com.chengze.extend.security.JwtTokenUtil;
-import com.sun.tools.corba.se.idl.constExpr.Not;
 import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
