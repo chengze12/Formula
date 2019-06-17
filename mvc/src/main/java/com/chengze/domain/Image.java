@@ -1,6 +1,11 @@
 package com.chengze.domain;
 
+import com.chengze.service.LamStorageService;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import java.util.UUID;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -21,10 +26,23 @@ public class Image {
         @Column(name="interior")
         private String interior;
 
+        @Column(name="url")
+        private String url;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "car_id")
         private Car car;
+
+        @NotNull
+        @Column(name="UUID", unique = true)
+        private String uuid= UUID.randomUUID().toString();
+
+        @NotNull
+        @Column(name = "extention")
+        private String extention;
+
+
+//        private LamStorageService lamStorageService;
 
         public void setCar(Car c) {
                 this.car = c;
@@ -61,5 +79,25 @@ public class Image {
         public String getInterior(){
 
                 return interior;
+        }
+
+
+        public void seturl(String url){
+                this.url=url;
+        }
+        public String getUrl(){
+                return url;
+        }
+
+        public String getUuid(){
+                return uuid;
+        }
+
+
+        public void setExtention(String extention){
+                this.extention=extention;
+        }
+        public String getExtention(){
+                return extention;
         }
 }

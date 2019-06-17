@@ -1,0 +1,1 @@
+Alter table users add column  url boolean varchar(255) not NULL;

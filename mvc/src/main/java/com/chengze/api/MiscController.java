@@ -28,25 +28,26 @@ public class MiscController {
     @Autowired
     ImageService imageService;
 
-//    @RequestMapping(value = "/picture", method = RequestMethod.POST)
-//    public Map<String, String > uploadPicture(@RequestParam(value = "pic")MultipartFile picture){
-//        Map<String, String> result = new HashMap<>(1);
-//        try{
-//            Image image = imageService.saveFakeImage(picture);
-//            result.put("s3_uuid", image.getUrl());
-//            //            result.put("s3_url", s3Image.getUuid()
-//        }catch (ServiceException e){
-//            logger.error("error on saving recod", e);
-//        }
-//        return result;
-//    }
-
     //http://localhost:8080/api/misc/picture
     @RequestMapping(value = "/picture", method = RequestMethod.POST)
     public Map<String, String > uploadPicture(@RequestParam(value = "pic")MultipartFile picture){
-        logger.debug(picture.getOriginalFilename());
-        return new HashMap<>();
+        Map<String, String> result = new HashMap<>(1);
+        try{
+            Image image = imageService.saveFakeImage(picture);
+            result.put("s3_url", image.getUrl());
+            //            result.put("s3_url", s3Image.getUuid()
+        }catch (ServiceException e){
+            logger.error("error on saving recod", e);
+        }
+        return result;
     }
+
+//    //http://localhost:8080/api/misc/picture
+//    @RequestMapping(value = "/picture", method = RequestMethod.POST)
+//    public Map<String, String > uploadPicture(@RequestParam(value = "pic")MultipartFile picture){
+//        logger.debug(picture.getOriginalFilename());
+//        return new HashMap<>();
+//    }
 
     //http://localhost:8080/api/misc/email
     @RequestMapping(value = "/email", method = RequestMethod.POST)
