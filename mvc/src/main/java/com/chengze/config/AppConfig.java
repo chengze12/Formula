@@ -40,7 +40,7 @@ public class AppConfig {
     }
 
     @Bean
-//    @Profile({"dev", "test"})
+    @Profile({"dev", "test"})
     public AmazonSQS getAmazonSQS(){
         AmazonSQS SQSclient = AmazonSQSClientBuilder.standard()
                 .withCredentials(new DefaultAWSCredentialsProviderChain())

@@ -35,7 +35,6 @@ public class MiscController {
         try{
             Image image = imageService.saveFakeImage(picture);
             result.put("s3_url", image.getUrl());
-            //            result.put("s3_url", s3Image.getUuid()
         }catch (ServiceException e){
             logger.error("error on saving recod", e);
         }

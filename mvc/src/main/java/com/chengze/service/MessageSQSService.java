@@ -3,6 +3,7 @@ package com.chengze.service;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,8 @@ public class MessageSQSService {
     }
 
     public String getQueueUrl(String queueName){
-        String queueurl =sqs.getQueueUrl(queueName).getQueueUrl();
+        GetQueueUrlResult request = sqs.getQueueUrl(queueName);
+        String queueurl =request.getQueueUrl();
         return queueurl;
     }
 

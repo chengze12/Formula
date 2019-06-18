@@ -41,6 +41,7 @@ public class ImageService {
 
 
     public Image saveFakeImage(MultipartFile multipartFile) throws ServiceException{
+        String bucket="chengze";
         if(multipartFile==null || multipartFile.isEmpty()) throw new ServiceException("File must not be null!");
         String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
                 String homeDir=System.getProperty("") !=null ? System.getProperty("") : "/tmp/";
@@ -51,7 +52,7 @@ public class ImageService {
                 String s3key= image.getUuid()+ "." +extension;
                 lamStorageService.uploadObject(s3key, localFile);
                 S3Object s3Object= lamStorageService.getObject(s3key);
-                image.seturl(lamStorageService.getObjectURL(s3key));
+                image.seturl(lamStorageService.getObjectURL(bucket, s3key));
                 image.setExtention(extension);
                 return image;
             }catch(IOException io) {

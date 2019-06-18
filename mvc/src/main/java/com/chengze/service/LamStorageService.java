@@ -31,7 +31,7 @@ public class LamStorageService {
     }
 
 
-    public String getObjectURL(String key){
+    public String getObjectURL(String bucket, String  key){
 
         URL url= s3Client.getUrl(bucket, key);
         String geturl= url.toString();
