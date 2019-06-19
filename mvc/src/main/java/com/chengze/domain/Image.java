@@ -1,7 +1,5 @@
 package com.chengze.domain;
 
-import com.chengze.service.LamStorageService;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

@@ -23,7 +23,9 @@ public class ImageService {
     public ImageRepository imageRepository;
 
     @Autowired
-    private LamStorageService lamStorageService;
+    private StorageService storageService;
+
+
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     public Image save(Image image){
@@ -40,19 +42,19 @@ public class ImageService {
     }
 
 
+
     public Image saveFakeImage(MultipartFile multipartFile) throws ServiceException{
-        String bucket="chengze";
         if(multipartFile==null || multipartFile.isEmpty()) throw new ServiceException("File must not be null!");
         String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-                String homeDir=System.getProperty("") !=null ? System.getProperty("") : "/tmp/";
+                String homeDir=System.getProperty("catalina.base") !=null ? System.getProperty("catalina.base") : "/tmp/";
                 File localFile= new File(homeDir+ multipartFile.getOriginalFilename());
             try{
                 multipartFile.transferTo(localFile);
                 Image image= new Image();
                 String s3key= image.getUuid()+ "." +extension;
-                lamStorageService.uploadObject(s3key, localFile);
-                S3Object s3Object= lamStorageService.getObject(s3key);
-                image.seturl(lamStorageService.getObjectURL(bucket, s3key));
+                storageService.uploadObject(s3key, localFile);
+                S3Object s3Object= storageService.getObject(s3key);
+                image.seturl(storageService.getObjectURL( s3key));
                 image.setExtention(extension);
                 return image;
             }catch(IOException io) {

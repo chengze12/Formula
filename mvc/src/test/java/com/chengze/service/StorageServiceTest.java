@@ -21,24 +21,24 @@ import static org.mockito.ArgumentMatchers.anyString;
 @ContextConfiguration(classes ={AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
-public class LamStorageServiceTest {
+public class StorageServiceTest {
     @Autowired
-    private LamStorageService lamStorageService;
+    private StorageService storageService;
     @Autowired
     private AmazonS3 s3FakeClient;
     @Test
     public void uploadObjectTest(){
         File testFile = new File("laowang.png");
-        lamStorageService.uploadObject("formula-dev", testFile);
+        storageService.uploadObject("formula-dev", testFile);
         Mockito.verify(s3FakeClient, Mockito.times(1)).putObject(any());
     }
 
     @Test
     public void getObjectUrlTest(){
-        String bucket= "chengze";
+
         String key="fakekey";
         Mockito.when(s3FakeClient.getUrl(anyString(), anyString())).thenReturn(Mockito.mock(URL.class));
-        lamStorageService.getObjectURL(bucket, key);
+        storageService.getObjectURL( key);
         Mockito.verify(s3FakeClient, Mockito.times(1)).getUrl(anyString(),anyString());
     }
 }

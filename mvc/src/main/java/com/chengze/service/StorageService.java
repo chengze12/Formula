@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +15,25 @@ import java.io.File;
 import java.net.URL;
 
 @Service
-public class LamStorageService {
+public class StorageService {
 
     private AmazonS3 s3Client;
 
+    @Value("${aws.bucket.name}")
     private String bucket;
 
-    public LamStorageService(@Autowired AmazonS3 s3){
+    public StorageService(@Autowired AmazonS3 s3){
         this.s3Client=s3;
     }
-    public void uploadObject(String bucketName, File file){
+    public void uploadObject(String key, File file){
 
         // Upload a file as a new object with ContentType and title specified.
-        PutObjectRequest request = new PutObjectRequest(bucketName, file.getName(), file);
+        PutObjectRequest request = new PutObjectRequest(bucket, key, file);
         s3Client.putObject(request);
     }
 
 
-    public String getObjectURL(String bucket, String  key){
+    public String getObjectURL( String  key){
 
         URL url= s3Client.getUrl(bucket, key);
         String geturl= url.toString();
@@ -42,7 +44,7 @@ public class LamStorageService {
         if (key == null) {
             return null;
         }else{
-            return getObject(key);
+            return s3Client.getObject(bucket,key);
         }
     }
 //
