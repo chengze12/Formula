@@ -52,6 +52,6 @@ public class MiscController {
     @RequestMapping(value = "/email", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void sendEmail(@RequestParam(value = "userId") Long userid){
-        messageSQSService.sendMessage(String.valueOf(userid));
+        messageSQSService.sendMessage(String.valueOf(userid),5);
     }
 }

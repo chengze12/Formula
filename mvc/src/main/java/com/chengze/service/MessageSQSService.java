@@ -29,7 +29,7 @@ public class MessageSQSService {
 
 
 
-    public void sendMessage(String message){
+    public void sendMessage(String message,int Delaytime){
         SendMessageRequest send_msg_request = new SendMessageRequest()
                 .withQueueUrl(queueUrl)
                 .withMessageBody(message)

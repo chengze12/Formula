@@ -15,8 +15,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.chengze</groupId>
+            <artifactId>Formula-mvc</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+
+        <!-- SendGrid - Email with HTML Template -->
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>4.4.1</version>
         </dependency>
 
         <dependency>
@@ -29,6 +41,12 @@
             <artifactId>amazon-sqs-java-messaging-lib</artifactId>
             <version>1.0.4</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.chengze</groupId>
+            <artifactId>Formula-mvc</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
